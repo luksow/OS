@@ -1,0 +1,16 @@
+*ABOUT
+This code is an effect of operating system development by Łukasz Sowa. It's kind of experiment for fun and learning new things.
+There's a series of blog posts (in Polish) about developing this OS on:
+http://lukaszsowa.pl
+
+*REPOSITORY
+http://github.com/luksow/OS
+
+*INSTALLATION
+Use provided Makefile with GNU Make
+
+*LICENSE
+See provided LICENSE
+
+*FINAL THOUGHTS
+Have fun and visit http://lukaszsowa.pl
