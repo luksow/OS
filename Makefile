@@ -1,7 +1,10 @@
 run: image
 	qemu -hda ./bin/hda.img
 
-bootloader: boot.asm
+prepare:
+	mkdir bin
+
+bootloader: prepare boot.asm
 	nasm boot.asm -f bin -o ./bin/boot.bin
 
 image: bootloader
