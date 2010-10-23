@@ -7,10 +7,12 @@ prepare:
 bootloader: prepare boot.asm
 	nasm boot.asm -f bin -o ./bin/boot.bin
 
-image: bootloader
-	echo 'Ala ma kota' > ./bin/text
-	dd if=/dev/zero of=./bin/zeros bs=1  count=500
-	cat ./bin/boot.bin ./bin/text ./bin/zeros > ./bin/hda.img
+setup:
+	nasm setup.asm -f bin -o ./bin/setup.bin
+
+image: bootloader setup
+	dd if=/dev/zero of=./bin/zeros bs=1  count=512
+	cat ./bin/boot.bin ./bin/setup.bin ./bin/zeros > ./bin/hda.img
 
 clean:
 	rm -rf ./bin/*

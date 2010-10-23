@@ -10,8 +10,8 @@ bootloader:
 	mov	bh, 0x00	; page number
 	mov	bl, 0x07	; colors
 
-.next_char:		
-	lodsb		
+.next_char:
+	lodsb
 	or	al, al		; letter here
 	jz	.continue
 	int	0x10		; BIOS video interrupt
@@ -22,11 +22,8 @@ bootloader:
 	mov	ah, 0x42	; extension
 	mov	dl, 0x80	; drive number (0x80 should be drive #0)
 	int	0x13
-	cli			; turn off maskable interrupts, we don't need them now
-	hlt
-.halt:	jmp	.halt
-	
-msg:	
+	jmp	0x0000:0x7E00	; jump to setup code
+msg:
 	db	'Hello from bootloader!', 13, 10, 0
 read_pocket:
 	db	0x10		; size of pocket
@@ -34,7 +31,7 @@ read_pocket:
 	dw	1		; number of sectors to transfer
 	dw	0x7E00, 0x0000	; address to write
 	dd	1		; LBA
-	dd	0		; upper LBA 
+	dd	0		; upper LBA
 
 times 510-($-$$) db 0		; fill rest with zeros
 dw 0xAA55			; bootloader indicator, used by BIOS
