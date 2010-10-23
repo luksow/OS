@@ -5,13 +5,13 @@ check_a20:			; check if A20 is not enabled, it's all about comparing 0xFFFF:0x7E
 	mov	ax, 0xFFFF
 	mov	es, ax
 	mov	di, 0x7E0E
-	mov	al, [es:di]
+	mov	al, byte[es:di]
 	cmp	al, 0x55	; comparing with 0x55 (first part)
 	jne	enter_pmode	; if first byte is not wrapping around then second of course too
 	; now we have to check if it not happened by chance
 	mov	al, 0x69	; therefore we will set first byte and check results
-	mov	[es:di], al	; load new value
-	mov	bl, [0x7DFE]	; load old value
+	mov	byte[es:di], al	; load new value
+	mov	bl, byte[0x7DFE]	; load old value
 	cmp	bl, 0x69
 	jne	enter_pmode
 
