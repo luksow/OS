@@ -71,5 +71,10 @@ gdt_desc:
 
 [BITS 32]
 clear_pipe:
-	hlt			; in pmode :)
-	jmp clear_pipe
+	mov	ax, 0x10	; GDT address of data segment
+	mov	ds, ax		; set data segment register
+	mov	ss, ax		; set stack segment register
+	mov	esp, 0x9000	; set stack
+	mov	ebp, esp	; set bracket pointer
+	jmp	0x7F00		; jump to code
+	times 256-($-$$) db 0	; fill rest with zeros for alignment
