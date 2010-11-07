@@ -1,10 +1,16 @@
 char hello[] = "Hello from kernel!";
 
-int main()
+int main(void* mbd, unsigned int magic)
 {
 	int count = 0;
 	int i = 0;
 	unsigned char *videoram = (unsigned char *) 0xB8000; /* 0xB0000 for monochrome monitors */
+
+	if ( magic != 0x2BADB002 )
+	{
+		/* something went wrong.. */
+		while(1); /* .. so hang! :) */
+	}
 
 	/* clear screen */
 	for(i=0; i<16000; ++i)

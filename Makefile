@@ -1,22 +1,16 @@
-run: image
-	qemu -hda ./bin/hda.img
+run: kernel
+	qemu -kernel ./bin/kernel.bin
 
 prepare:
 	mkdir -p bin
 
-bootloader: prepare boot.asm
-	nasm boot.asm -f bin -o ./bin/boot.bin
+loader: prepare
+	nasm -f elf -o ./bin/loader.o loader.asm
 
-setup:
-	nasm setup.asm -f bin -o ./bin/setup.bin
 
-image: bootloader setup kernel
-	dd if=/dev/zero of=./bin/zeros bs=1  count=512
-	cat ./bin/boot.bin ./bin/setup.bin ./bin/main.bin ./bin/zeros > ./bin/hda.img
-
-kernel: main.c
-	gcc -m32 -c -o ./bin/main.o main.c
-	ld -T linker.ld ./bin/main.o -o ./bin/main.bin
+kernel: loader main.c
+	gcc -o ./bin/main.o -c main.c -m32 -nostdlib -nostartfiles -nodefaultlibs
+	ld -melf_i386 -T linker.ld -o ./bin/kernel.bin ./bin/loader.o ./bin/main.o
 
 clean:
 	rm -rf ./bin/*
