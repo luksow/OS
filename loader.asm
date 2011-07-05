@@ -25,4 +25,4 @@ loader:
 section .bss
 align 4
 stack:
-   resb STACKSIZE                     ; reserve stack space
+   	resb 	STACKSIZE		; reserve stack space

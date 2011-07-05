@@ -1,9 +1,9 @@
 ENTRY (loader)
 
-SECTIONS{
+SECTIONS {
     . = 0x00100000;
 
-    .text :{
+    .text : {
         *(.text)
     }
 
