@@ -9,4 +9,6 @@ void vga_cls();
 
 void vga_puts(const char* str);
 
+static void vga_scroll();
+
 #endif

@@ -24,7 +24,7 @@ void vga_cls()
 		*(vga_mem + i) = (u16int) 3872; // ((((0 << 4) | (15 & 0xFF)) << 8) | 0x20) // white spaces on black background
 }
 
-void vga_scroll()
+static void vga_scroll()
 {
 	int i;
 	// rewrite lines one up
