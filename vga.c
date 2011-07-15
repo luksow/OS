@@ -38,7 +38,7 @@ static void vga_scroll()
 
 void vga_puts(const char* str)
 {
-	// black white letters on black background
+	// white letters on black background
 	const u16int attribute = 3840; // ((((0 << 4) | (15 & 0x0F)) << 8))
 
 	int i = 0;
