@@ -1,9 +1,12 @@
 #include "common.h"
+#include "gdt.h"
 #include "vga.h"
 #include "asm.h"
 
 int main(void* mbd, unsigned int magic)
 {
+	gdt_init();
+
 	vga_init();
 	vga_cls();
 

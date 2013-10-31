@@ -24,7 +24,7 @@ void vga_cls()
 		*(vga_mem + i) = (u16int) 3872; // ((((0 << 4) | (15 & 0xFF)) << 8) | 0x20) // white spaces on black background
 }
 
-void vga_scroll()
+static void vga_scroll()
 {
 	int i;
 	// rewrite lines one up
@@ -38,7 +38,7 @@ void vga_scroll()
 
 void vga_puts(const char* str)
 {
-	// black white letters on black background
+	// white letters on black background
 	const u16int attribute = 3840; // ((((0 << 4) | (15 & 0x0F)) << 8))
 
 	int i = 0;
