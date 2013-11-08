@@ -12,9 +12,15 @@ void vga_init()
 	cursor = 0;
 
 	if ((*((volatile u16int*) 0x410) & 0x30) == 0x30) // detecting monochrome monitor
-		vga_mem = (u16int*) 0xB0000;
+	{
+		ga_mem = (u16int*) 0xB0000;
+		vga_puts("Using monochrome monitor");
+	}
 	else
+	{
 		vga_mem = (u16int*) 0xB8000; // it's color
+		vga_puts("Using color monitor");
+	}
 }
 
 void vga_cls()
